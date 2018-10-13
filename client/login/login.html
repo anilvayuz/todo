@@ -1,0 +1,31 @@
+<!-- 
+
+<body>
+  <h1>Login Signup Form</h1>
+
+ 
+  {{> login}}
+</body> -->
+<head>
+  <title>Todo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+</head>
+ <template name="login">
+  <div class="container-fluid wl-custom-container-1">
+  <h3 style="color : #fff;text-align: center;"> Todo </h3>
+  <div class="login1">
+    <div class="login-triangle"></div>
+    <form class="login-container">
+        <p><input type="text" required placeholder="Email" title="Email" id="loguser" class="wl-input-common"></p>
+        <p><input type="password" required placeholder="Password" title="password" id="logpassword" class="wl-input-common" ></p>
+        <p><input type="submit" value="Log in" class="wl-login-button wl-input-common" id="logged" title="loginup" ></p>
+        <p> <span class="wl-not-register"> Not Register Yet? </span> <a  value="Signup" id="Signup" href="/signup" class="wl-custom-link" title="signup">Signup</a></p>
+    </form>
+  </div>
+</div>
+ </template>
+ 
+
+
+
+

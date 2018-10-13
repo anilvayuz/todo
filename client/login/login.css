@@ -1,0 +1,122 @@
+
+
+.login1 {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login1 p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #28d;
+}
+
+.login-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login1 p {
+  padding: 12px;
+}
+
+.login1 .wl-input-common {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: none;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+.login1 input[type="email"],
+.login1 input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+}
+
+/* Text fields' focus effect */
+.login1 input[type="email"]:focus,
+.login1 input[type="password"]:focus {
+  border-color: #888;
+}
+
+.wl-login-button {
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.wl-login-button:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+.wl-login-button:focus {
+  border-color: #05a;
+}
+.empty_filed{
+  border : 2px solid red !important;
+}
+.wl-custom-container-1{
+  background-image: linear-gradient(to right, rgba(76,76,76,0.59) 0%, rgba(71,71,71,0.59) 0%, rgba(43,43,43,0.59) 1%, rgba(44,44,44,0.59) 2%, rgba(89,89,89,0.59) 12%, rgba(63,63,63,0.59) 49%, rgba(28,28,28,0.98) 98%, rgba(0,0,0,0.99) 99%, rgba(19,19,19,1) 100%),url("beverage-coffee-computer-984536.jpg");
+  background-repeat: no-repeat;
+   position: fixed;
+   left: 0;
+    min-width: 100%;
+    min-height: 100%;
+
+}
+.wl-signup-button{
+  background: #28d;
+  border-color: transparent;
+  color: #fff;
+  padding: 10px 50px;
+  margin-left: 15%;
+}
+.wl-signup-button:hover {
+  background: #17c;
+}
+.wl-signup-button:focus {
+  border-color: #05a;
+}
+.wl-not-register{
+    letter-spacing: 1px;
+    margin-left: 37%;
+}
+.wl-custom-link{
+  float: right;
+  letter-spacing: 2px;
+  font-weight: bold;
+    margin-left: 2%;
+}
+.wl-custom-link:hover{
+  text-decoration: none;
+}

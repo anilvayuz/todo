@@ -1,0 +1,50 @@
+  <!-- <head>
+  <title>project1</title>
+</head>
+
+<body >
+  <h1>Login Signup Form</h1>
+
+ 
+  {{> signup}}
+</body> -->
+<head>
+  <title>project1</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+</head>
+ <template name="signup">  
+
+    <div class="container-fluid wl-custom-container">
+ 	  <h3 style="text-align: center;color: #fff"> Sign up to make To do list</h3>
+    <div class="col-md-6 col-md-offset-3">
+      <div class="signup1">
+      <div class="signup-triangle"></div>
+  <form id="myForm" class="signup-container">
+            
+            <p><input type="text"   placeholder="Username" id="username" name="user" class="wl-input wl-signup-common" required></p>
+        
+        
+           <p> <input type="email"   placeholder="John@gmail.com" id="mail" class="wl-input wl-signup-common" required></p>
+       
+        
+            <p><input type="password"   placeholder="Password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  class="wl-input wl-signup-common" required></p>
+     
+        
+       
+           <p><input type="submit" value="Submit" id="submitButton" class="wl-custom-button wl-signup-common" title="Signup"></p>
+          <p><span class="wl-not-register" style="margin-left: 25%;">Already have a account!</span><a type="submit" href="/" class="wl-custom-link" id="already-exist" value="login">Login</a></p>
+        
+
+    </form>
+  
+</div>
+  </div>
+</div>
+ </template>
+ 
+ 
+ 
+
+
+
+

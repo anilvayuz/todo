@@ -1,0 +1,243 @@
+<head>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+   <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="alert/dist/sweetalert.css">
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+</head>
+<template name="home">
+   <nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-fixed navbar-default wl-custom-navbar" style="margin : 0;">
+      <a class="navbar-brand" href="#">ToDoList</a>
+      <div class=" navbar-right wl-custom-navbar-1" >
+         <form class="form-inline form-group form-horizontal">
+            <h4> Logged in as {{username}}  </h4>
+            <!-- if Session has user id -->
+            <!--  <i class="fa fa-bell fa-2x" aria-hidden="true" id="notifications" title="Notifications" style="margin-right: 15px;"></i>
+               <div class=' wl-custom-container-notifications' id="show_notification">
+                  <p>here are your notifications</p>
+               </div> -->
+            {{#if mySession}}
+            <button type="submit" class="btn btn-danger" id="logout" style="margin-left : 15px;" >Logout</button>
+            {{/if}}
+            <!-- if Session does not have user id -->
+            <ul class="nav navbar-nav">
+               <li class="dropdown" style="margin: -7px; font-weight: bold;">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell"></i> Notifications </a>
+                  <ul class="dropdown-menu notify-drop">
+                     <div class="notify-drop-title">
+                        <div class="row">
+                           <div class="col-md-6 col-sm-6 col-xs-6">Assigned Tasks</div>
+                           <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title="tümü okundu."><i class="fa fa-dot-circle-o"></i></a></div>
+                        </div>
+                     </div>
+                     <!-- end notify title -->
+                     <!-- notify content -->
+                     <div class="drop-content">
+                        {{#each notification}}
+                          
+                        <li >
+                           <div class="col-md-3 col-sm-3 col-xs-3">
+                              <div class="notify-img"><img src="http://placehold.it/45x45" alt=""></div>
+                           </div>
+                           <div class="col-md-9 col-sm-9 col-xs-9 pd-l0 ">
+
+                              {{#if user_task_completed }} 
+
+
+                              <h5 id="new_task_top">Task is completed by {{user_name}}</h5>
+
+                              {{else}}
+                              <h5 id="new_task_top">Task is assign by {{user_name}} to You</h5>
+                              {{/if}} 
+                           </div>
+                        </li>
+                         
+                        {{/each}}
+                     </div>
+                     <div class="notify-drop-footer text-center">
+                        <a href=""><i class="fa fa-eye"></i> All Your Notifications are Here!</a>
+                     </div>
+                  </ul>
+               </li>
+            </ul>
+         </form>
+      </div>
+   </nav>
+   <div class="container wl-custom-container-2">
+      <div class="">
+         <ul class="nav nav-tabs nav-justified text-center wl-custom-nav" id="myTab" role="tablist">
+            <li class="nav-item active  wl-custom-tab">
+               <a class="nav-link " id="todo-tab" data-toggle="tab" href="#todo" role="tab" aria-controls="home" aria-selected="true"><i class="far fa-list-alt  wl-custom-icon-1"></i><br>
+               ToDo List
+               </a>
+            </li>
+            <li class="nav-item  wl-custom-tab">
+              <a class="nav-link" id="assignby-tab" data-toggle="tab" href="#assignby" role="tab" aria-controls="profile" aria-selected="false"> <i class="fas fa-tasks  wl-custom-icon-1"></i> <br> Task Assign By</a>
+            </li>
+            <li class="nav-item  wl-custom-tab">
+               <a class="nav-link" id="assignto-tab" data-toggle="tab" href="#assignto" role="tab" aria-controls="contact" aria-selected="false"> <i class="fas fa-award  wl-custom-icon-1"></i> <br> Task Assign To</a>
+            </li>
+         </ul>
+         <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade  active in" id="todo" role="tabpanel" aria-labelledby="todo-tab">
+               <form class=" form-group form-inline ">
+                  <input type="text"  placeholder="assign task to" class="form-control hide_display" id="assigned_task_input" data-source="user_details" autocomplete="off" spellcheck="off" required title="Name with comma and space" >
+                  <input type="text" placeholder="here is your todo/Task Assign"  class="form-control wl-custom-input " id="list_item" pattern="[a-zA-Z]{,15}">
+                  <textarea class="form-control hide_display" rows="1" id="task_discription" placeholder="add the discription"></textarea>
+                  <label class="hide_display" id="dates_label_start">Task Start Date</label><input type="date" data-date="" class="form-control hide_display" data-date-format="DD MMMM YYYY" title="Task start date" id="task_start_date">
+                  <label class="hide_display" id="dates_label_end">Task End Date</label><input type="date" data-date="" class="form-control hide_display" data-date-format="DD MMMM YYYY" title="Task end date" id="task_end_date">
+                  <div class='input-group date datepicker' id="start_date_show_hide" >
+                    <input type='text' class="form-control" placeholder="Enter the due date of task" title="Start Date" id="start_date" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                  <div class='input-group date datepicker' id="due_date_show_hide" >
+                    <input type='text' class="form-control" placeholder="Enter the due date of task" title="Due Date" id="due_date" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                  <button type="submit" class="btn btn-danger" id="todo_submit"  >Submit</button>
+                </form>
+               <div class="col-md-12">
+                  <input type="checkbox" id="check_if_checked" title="Assisgn task to Someone" style="margin-left: 25px;">
+                  <label>Assign task to someone </label>
+                  <hr>
+                  {{#each reminder}}
+                  <p id="task_reminder" class="task_reminder_class">Reminder:- Your Task due date is near by so complete it before {{due_date}}</p>
+                  {{/each}}
+                  <!--  </form> -->
+                  <div class="row">
+                  <table style="color : #000;"> 
+                    <tr>
+                          <th></th>
+                          <th class="wl-table-align">Task name</th>
+                          <th class="wl-table-align">Created On</th>
+                          <th class="wl-table-align">Start Date</th>
+                          <th class="wl-table-align">Due Date</th>
+                          <th class="wl-table-align">Action</th>
+                    </tr>
+                  
+                     {{#each show}}
+                   
+                   
+                        
+                        <tr>
+                            {{#if task_completed}}
+                          <td class="wl-table-align"><input type="checkbox" checked="checked" id="check_task_completed"></td>
+                        {{else}}
+                        <td class="wl-table-align"><input type="checkbox" id="check_task_completed"></td>
+                        {{/if}}
+                     
+                      
+                        <td class="wl-table-align"><h3 class="inner wl-custom-header wl-icon-text" id="strike" >{{task_title}}</h3></td>
+                        <td class="wl-table-align">{{format_date}}</td>
+                        <td class="wl-table-align">{{task_start_end_date.start_date}} <button type="submit"  id="task_start_time" class="btn btn-success">Start Task</button> <div id="show_start_time">Task is started at {{show_task_start_time}}</div></td>
+                       
+                        <td class="wl-table-align">{{task_start_end_date.end_date}} <button type="submit" disabled="disabled" id="{{_id}}" class="btn btn-success capture_task_end_time">End Task</button>
+                          <div id="show_end_time">Task is ended at {{show_task_end_time}}</div>
+                          <div id="total_time_taken">Total Time taken to complete the task is {{total_time_to_complete_task}} sec.</div>
+                        </td>
+
+                       <td class="wl-table-align"> <i class="fa fa-pencil-square-o fa-2x wl-custom-icon" aria-hidden="true" title=" edit the value" data-toggle="modal" data-target="#myModal"  id="edit" ></i>
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                           <div class="modal-dialog">
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                 <div class="modal-body">
+                                    <input type="text" class="form-control empty_modal" placeholder="Update the Value" value="{{value}}" name="update" id="{{_id}}">
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="submit" class="btn btn-default edit" data-dismiss="modal" id="saveChanges"  >Save Changes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <i class="fa fa-times fa-2x wl-custom-icon" aria-hidden="true" id="remove" title="Remove the Value"  ></i>
+                        <!-- <input type="text" id="date-picker" placeholder="click to select due date" class="datepicker"> -->
+
+                        <!-- {{#if task_due_date}}
+                       <p>This is Your Due Date {{due_date}} </p>
+                       {{else}}
+                       <p>This Date {{due_date}} is past date.</p>
+                       {{/if}} -->
+                      </td>
+                      </tr>
+                      
+                     
+                     {{/each}}
+                 
+                </table>
+                </div>
+               </div>
+            </div>
+            <div class="tab-pane fade" id="assignby" role="tabpanel" aria-labelledby="assignby-tab">
+               <h5 class="wl-custom-header-1">Task Assign to You </h5>
+               <div class="col-md-12">
+                  <table>
+                     <tr>
+
+                        <th class="wl-custom-table-1 wl-table-align"></th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task Assign by </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task Allocation Time </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task Start Date </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task End Date </th>
+                     </tr>
+                     {{#each task_assigned_by}}
+                     <tr>
+                        {{#if assigned_task_completed}}
+                          <td class="wl-table-align"><input type="checkbox" checked="checked" id="check_if_assigned_task_completed"></td>
+                        {{else}}
+                        <td class="wl-table-align"><input type="checkbox" id="check_if_assigned_task_completed"></td>
+                        {{/if}}
+                        {{#each info_user_by}}
+                        <td class="wl-custom-table-2 wl-table-align wl-custom-header">{{user_name}}</td>
+                        {{/each}}
+                        <td class="wl-custom-table-2 wl-table-align ">{{task_title}}</td>
+                        <td class="wl-custom-table-2 wl-table-align ">{{task_assigned_date_by.task_created_at}}</td>
+                        <td class="wl-custom-table-2 wl-table-align ">{{task_assigned_date_by.task_start_date}}</td>
+                        <td class="wl-custom-table-2 wl-table-align ">{{task_assigned_date_by.task_end_date}}</td>
+                     </tr>
+                      {{/each}}
+                  </table>
+               </div>
+            </div>
+            <div class="tab-pane fade" id="assignto" role="tabpanel" aria-labelledby="assignto-tab">
+              <h5 class="wl-custom-header-1">Task Assigned by You </h5>
+               <div class="col-md-12">
+                  <table>
+                     <tr>
+                        <th class="wl-custom-table-1 wl-table-align"> Task Assign To </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task Allocation Time </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task Start Date </th>
+                        <th class="wl-custom-table-1 wl-table-align"> Task End Date </th>
+                     </tr>
+                     {{#each task_assigned_to}}
+                     <tr>
+                        {{#each info_user_to}}
+                        <td class="wl-custom-table-2 wl-table-align wl-custom-header">{{user_name}}</td>
+                        {{/each}}
+                        <td class="wl-custom-table-2 wl-table-align">{{task_title}}</td>
+                        <td class="wl-custom-table-2 wl-table-align">{{task_assigned_date_to.task_created_at}}</td>
+                        <td class="wl-custom-table-2 wl-table-align ">{{task_assigned_date_to.task_start_date}}</td>
+                        <td class="wl-custom-table-2 wl-table-align ">{{task_assigned_date_to.task_end_date}}</td>
+                     </tr>
+                    {{/each}}
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </div>
+</template>
